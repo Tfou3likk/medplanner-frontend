@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title><strong>Votre Espace Patient</strong></title>
+</head>
+
+<body>
+	<h2>Détail de votre endez-vous</h2>
+
+	<form action="/rdv/modif" method="post">
+		<table border="1" cellpadding="6">
+
+			<tbody>
+				<tr>
+					<td><label>Date : </label></td>
+					<td><input required type="date" name="date" th:value="${rdvPatient.dateRdv}" />
+					<td></td>
+				<tr>
+				</tr>
+					<td><label>Heure : </label></td>
+					<td><input required type="time" pattern="[08-17]{2}:00"  min="08:00" max="17:00" name="heure" th:value="${rdvPatient.heure}" />
+					<td></td>
+				<tr>
+				</tr>
+					<td><label>Medecin : </label></td>
+					<td th:text="${rdvPatient.medecin.nom}"></td>
+					<td th:text="${rdvPatient.medecin.prenom}"></td>
+				<tr>
+				</tr>
+					<td><input type="hidden" name="idRdv" th:value="${rdvPatient.id}" /></td>
+					<td><input type="submit" value="modifier"></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<br> <a href="/home"><button>Retour</button></a>
+</body>
+
+</html>
+    

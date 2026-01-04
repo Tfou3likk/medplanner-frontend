@@ -116,6 +116,11 @@ public class RendezVous {
 	public void setCompteRenduRdv(String compteRenduRdv) {
 		this.compteRenduRdv = compteRenduRdv;
 	}
+
+	public RendezVous editRdvPatient(Integer id2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
 }

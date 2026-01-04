@@ -19,6 +19,7 @@
             <th>Nom</th>
             <th>Prenom</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -28,12 +29,17 @@
             <td th:text="${rdv.heure}"></td>
             <td th:text="${rdv.medecin.nom}" ></td>
             <td th:text="${rdv.medecin.prenom}" ></td>
-            <td>
+ 	        <td>
+				<form action="/rdv/edit" method="post">
+					 <input type="hidden" name="idRdv" th:value="${rdv.id}"/>
+					<input type="submit" value="modifier">
+				</form>				
+			</td>            
+ 	        <td>
 				<form action="/rdv/delete" method="post">
 					 <input type="hidden" name="idRdv" th:value="${rdv.id}"/>
 					<input type="submit" value="supprimer">
-				</form>
-				
+				</form>				
 			</td>
         </tr>
     </tbody>

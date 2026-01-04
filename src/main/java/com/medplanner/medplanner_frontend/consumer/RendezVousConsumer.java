@@ -3,6 +3,8 @@ package com.medplanner.medplanner_frontend.consumer;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalTime;
+import org.springframework.http.HttpStatus;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -10,6 +12,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import com.medplanner.medplanner_frontend.dto.RdvRequestDTO;
+import com.medplanner.medplanner_frontend.models.Patient;														 
 import com.medplanner.medplanner_frontend.models.RendezVous;
 
 @Component
@@ -37,6 +41,25 @@ public class RendezVousConsumer {
 				        (req, res) -> { throw new IllegalArgumentException("Patient non connecter ou acces refuse"); })
 		.body(new ParameterizedTypeReference<List<RendezVous>>() {});
 	}
+	public RendezVous editerRdvPatient(Integer id) {
+		return restClient.get().uri("/api/rdv/patient/edit/{id}", id).retrieve()
+				.onStatus(HttpStatusCode::is4xxClientError,
+				        (req, res) -> { throw new IllegalArgumentException("Patient non connecter ou acces refuse"); })
+		.body(new ParameterizedTypeReference<RendezVous>() {});
+	}											 
+	public List<RendezVous> modifierRdvPatient(Integer id, LocalDate date, LocalTime heure) {
+		Integer idrecu = id;
+  
+		return restClient.put().uri("/api/rdv/patient/modif/{id}", id).body(new RdvRequestDTO(date, heure))
+				.retrieve().onStatus(status -> status.value() == HttpStatus.CONFLICT.value(),
+		        (req, res) -> { throw new IllegalArgumentException("Cet Email est deja utiisé"); })
+				.onStatus(status -> status.is4xxClientError() && status.value() != HttpStatus.CONFLICT.value(),
+						(req, res) -> { throw new IllegalArgumentException("Des champs sont incorrect"); })
+																								 
+						 
+				   
+				.body(new ParameterizedTypeReference<List<RendezVous>>() {});
+	}										   
 	
 	public List<RendezVous> recherche(LocalDate date, Integer idPatient, Integer idMedecin, Integer idVille, Integer idSpecialite){
 		

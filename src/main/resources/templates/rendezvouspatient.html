@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title><strong>Votre Espace Patient</strong></title>
+</head>
+
+<body>
+	<h2>Bonjour
+		<span th:text="${session.patient.prenom}"></span>
+		<span th:text="${session.patient.nom}"></span>
+	</h2>
+
+	<table th:if="${!#lists.isEmpty(listRdv)}" border="1" cellpadding="6">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="rdv : ${listRdv}">
+            <td th:text="${rdv.dateRdv}"></td>
+            <td th:text="${rdv.heure}"></td>
+            <td th:text="${rdv.medecin.nom}" ></td>
+            <td th:text="${rdv.medecin.prenom}" ></td>
+            <td>
+				<form action="@{/rdv}" method="post">
+					 <input type="hidden" name="idRdv" th:value="${rdv.id}"/>
+					<input type="submit" value="supprimer">
+				</form>
+				
+			</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/home"><button>Retour</button></a>
+
+
+</body>
+
+</html>

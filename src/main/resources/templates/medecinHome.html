@@ -5,8 +5,12 @@
 </head>
 <body>
     <h2>Bonjour 
-		<span th:text="${session.medecin.prenom}"></span>
-		<span th:text="${session.medecin.nom}"></span></h2>
+		<span th:text="${session.medecin.prenom}"></span><br>
+		<span th:text="${session.medecin.nom}"></span><br>
+		<span th:text="${session.medecin.specialite.libelle}"></span><br>
+		<span th:text="${session.medecin.ville.libelle}"></span><br>
+			
+		</h2>
 		
     <h1>Vos rendez vous a venir</h1>
     

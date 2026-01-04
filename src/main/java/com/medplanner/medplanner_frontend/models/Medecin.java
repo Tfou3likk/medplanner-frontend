@@ -9,6 +9,10 @@ public class Medecin {
 	private String nom;
 	
 	private String prenom;
+	
+	private Ville ville;
+	
+	private Specialite specialite;
 
 	public Medecin() {
 		super();
@@ -20,6 +24,34 @@ public class Medecin {
 		this.email = email;
 		this.nom = nom;
 		this.prenom = prenom;
+	}
+	
+	
+	
+	public Medecin(Integer id, String email, String nom, String prenom, Ville ville, Specialite specialite) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.ville = ville;
+		this.specialite = specialite;
+	}
+
+	public Ville getVille() {
+		return ville;
+	}
+
+	public void setVille(Ville ville) {
+		this.ville = ville;
+	}
+
+	public Specialite getSpecialite() {
+		return specialite;
+	}
+
+	public void setSpecialite(Specialite specialite) {
+		this.specialite = specialite;
 	}
 
 	public Integer getId() {

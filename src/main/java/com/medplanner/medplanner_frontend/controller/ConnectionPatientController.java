@@ -30,12 +30,10 @@ public class ConnectionPatientController {
 		try {
 			Patient patient = patientConsumer.connect(email, password);
 			
-			//session.setAttribute("patient", patient);
-			//session.setAttribute("isLogged", true);
-			model.addAttribute("patient", patient);
-			model.addAttribute("isLogged", true);
-			return "home";
-			//return"redirect:/home";
+			session.setAttribute("patient", patient);
+			session.setAttribute("isLogged", true);
+	
+			return"redirect:/home";
 		}catch(IllegalArgumentException e){
 			model.addAttribute("loginFailure", true);
             return "login";

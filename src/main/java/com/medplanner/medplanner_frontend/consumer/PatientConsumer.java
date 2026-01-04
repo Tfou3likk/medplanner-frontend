@@ -1,11 +1,13 @@
 package com.medplanner.medplanner_frontend.consumer;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.RestClient;
 
 import com.medplanner.medplanner_frontend.dto.PatientConnectRequestDTO;
+import com.medplanner.medplanner_frontend.dto.PatientSignupRequestDTO;
 import com.medplanner.medplanner_frontend.models.Patient;
 
 @Component
@@ -23,6 +25,16 @@ public class PatientConsumer {
 		return restClient.post().uri("/api/patient/login").body(new PatientConnectRequestDTO(email, password))
 				.retrieve().onStatus(HttpStatusCode::is4xxClientError,
 				        (req, res) -> { throw new IllegalArgumentException("Identifiants invalides"); })
+				.body(Patient.class);
+	}
+	
+	public Patient register(String email, String nom, String prenom, String password) {
+		
+		return restClient.post().uri("/api/patient/signup").body(new PatientSignupRequestDTO(email, nom, prenom, password))
+				.retrieve().onStatus(status -> status.value() == HttpStatus.CONFLICT.value(),
+		        (req, res) -> { throw new IllegalArgumentException("Cet Email est deja utiisé"); })
+				.onStatus(status -> status.is4xxClientError() && status.value() != HttpStatus.CONFLICT.value(),
+						(req, res) -> { throw new IllegalArgumentException("Des chamsp sont incorrect"); })
 				.body(Patient.class);
 	}
 	

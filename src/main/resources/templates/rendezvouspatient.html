@@ -29,7 +29,7 @@
             <td th:text="${rdv.medecin.nom}" ></td>
             <td th:text="${rdv.medecin.prenom}" ></td>
             <td>
-				<form action="@{/rdv}" method="post">
+				<form action="/rdv/delete" method="post">
 					 <input type="hidden" name="idRdv" th:value="${rdv.id}"/>
 					<input type="submit" value="supprimer">
 				</form>

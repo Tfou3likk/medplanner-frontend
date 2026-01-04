@@ -28,4 +28,13 @@ public class RendezVousConsumer {
 		.body(new ParameterizedTypeReference<List<RendezVous>>() {});
 	}
 
+	public List<RendezVous> supprimerRdvPatient(Integer id) {
+	//public void supprimerRdvPatient(Integer id) {
+		return restClient.delete().uri("/api/rdv/patient/delete/{id}", id).retrieve()
+				.onStatus(HttpStatusCode::is4xxClientError,
+				        (req, res) -> { throw new IllegalArgumentException("Patient non connecter ou acces refuse"); })
+		.body(new ParameterizedTypeReference<List<RendezVous>>() {});
+	}
+
+
 }

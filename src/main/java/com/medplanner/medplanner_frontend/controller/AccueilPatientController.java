@@ -8,7 +8,7 @@ import com.medplanner.medplanner_frontend.models.Patient;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class AccueilController {
+public class AccueilPatientController {
 	
 	@GetMapping("/home")
 	public String home(HttpSession session) {

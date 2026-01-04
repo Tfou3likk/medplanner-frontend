@@ -1,5 +1,7 @@
 package com.medplanner.medplanner_frontend.consumer;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -28,13 +30,13 @@ public class PatientConsumer {
 				.body(Patient.class);
 	}
 	
-	public Patient register(String email, String nom, String prenom, String password) {
+	public Patient register(String email, String nom, String prenom, String password, LocalDate dateNaissance) {
 		
-		return restClient.post().uri("/api/patient/signup").body(new PatientSignupRequestDTO(email, nom, prenom, password))
+		return restClient.post().uri("/api/patient/signup").body(new PatientSignupRequestDTO(email, nom, prenom, password, dateNaissance))
 				.retrieve().onStatus(status -> status.value() == HttpStatus.CONFLICT.value(),
 		        (req, res) -> { throw new IllegalArgumentException("Cet Email est deja utiisé"); })
 				.onStatus(status -> status.is4xxClientError() && status.value() != HttpStatus.CONFLICT.value(),
-						(req, res) -> { throw new IllegalArgumentException("Des chamsp sont incorrect"); })
+						(req, res) -> { throw new IllegalArgumentException("Des champs sont incorrect"); })
 				.body(Patient.class);
 	}
 	

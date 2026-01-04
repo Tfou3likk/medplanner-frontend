@@ -6,8 +6,8 @@
 </head>
 
 <body>
-	<h2>Bonjour, veuillez vous connecter :</h2>
-		<form th:action="@{/login}" method="post">
+	<h2>Bonjour Docteur, veuillez vous connecter :</h2>
+		<form th:action="@{/loginmedecin}" method="post">
 			<label>Email</label>
 			<input type="text" name="email" required /><br>
 			<label>Mot de passe</label>
@@ -19,7 +19,6 @@
 			<p th:if="${loginFailure}" style="color: red">Email ou mot de passe incorrect</p>
 
 			<a th:href="@{/signup}"><button>Créer un compte</button></a>
-			<a th:href="@{/loginmedecin}"><button>Je suis medecin</button></a>
 </body>
 
 </html>

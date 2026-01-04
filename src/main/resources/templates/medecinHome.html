@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title><strong>Votre Espace Medecin</strong></title>
+</head>
+<body>
+    <h2>Bonjour 
+		<span th:text="${session.medecin.prenom}"></span>
+		<span th:text="${session.medecin.nom}"></span></h2>
+		
+    <h1>Vos rendez vous a venir</h1>
+    
+    
+</body>
+
+</html>

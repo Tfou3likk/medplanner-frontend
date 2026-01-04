@@ -5,15 +5,18 @@
     <h1>Créer un nouvel utilisateur</h1>
     <form method="post" th:action="@{/signup}">
         <label>Email</label>
-        <input type="text" name="email"/>
+        <input type="text" name="email"required/>
         <br/>
         <label>Prénom</label>
-        <input type="text" name="prenom"/>
+        <input type="text" name="prenom"required/>
         <br/>
         <label>Nom</label>
-        <input type="text" name="nom"/>
+        <input type="text" name="nom"required/>
         <br/>
-        <label>Nom</label>
+        <label>Date de naissance</label>
+		<input type="date" name="dateNaissance" required />
+		<br/>
+        <label>Mot de passe:</label>
         <input type="password" name="password"/>
         <br/>
         <input type="submit" value="Enregister & se connecter"/>

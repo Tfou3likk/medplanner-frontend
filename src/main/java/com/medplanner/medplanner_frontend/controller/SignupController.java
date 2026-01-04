@@ -1,5 +1,7 @@
 package com.medplanner.medplanner_frontend.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +29,11 @@ public class SignupController {
 	}
 	
 	@PostMapping("/signup")
-	public String sign(Model model, @RequestParam("email") String email, @RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("password") String password,  HttpSession session) {
+	public String sign(Model model, @RequestParam("email") String email, @RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("password") String password, @RequestParam("dateNaissance") String dateNaissance,  HttpSession session) {
 		
 		try {
             
-            Patient patient = patientConsumer.register(email, nom, prenom, password) ;
+            Patient patient = patientConsumer.register(email, nom, prenom, password, LocalDate.parse(dateNaissance)) ;
             
             session.setAttribute("isLogged", true);
             session.setAttribute("patient", patient);

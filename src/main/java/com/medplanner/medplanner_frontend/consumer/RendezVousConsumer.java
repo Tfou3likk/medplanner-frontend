@@ -1,6 +1,8 @@
 package com.medplanner.medplanner_frontend.consumer;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -34,6 +36,18 @@ public class RendezVousConsumer {
 				.onStatus(HttpStatusCode::is4xxClientError,
 				        (req, res) -> { throw new IllegalArgumentException("Patient non connecter ou acces refuse"); })
 		.body(new ParameterizedTypeReference<List<RendezVous>>() {});
+	}
+	
+	public List<RendezVous> recherche(LocalDate date, Integer idMedecin, Integer idVille, Integer idSpecialite){
+		
+		return restClient.get().uri(uriTotal -> uriTotal.path("/api/rdv/search")
+				.queryParam("date", date)
+				.queryParamIfPresent("idMedecin", Optional.ofNullable(idMedecin))
+				.queryParamIfPresent("idVille", java.util.Optional.ofNullable(idVille))
+                .queryParamIfPresent("idSpecialite", java.util.Optional.ofNullable(idSpecialite))
+                .build())
+        .retrieve()
+        .body(new ParameterizedTypeReference<List<RendezVous>>() {});
 	}
 
 

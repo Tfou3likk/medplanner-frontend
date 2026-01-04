@@ -37,6 +37,10 @@ public class RechercheRdvController {
 		
 		Patient patient = (Patient) session.getAttribute("patient");
 		
+		if(patient == null) {
+			return"redirect:/login";
+		}
+		
 		model.addAttribute("patient", patient);
 		
 		model.addAttribute("medecins", ifConsumer.getMedecins());
@@ -57,7 +61,7 @@ public class RechercheRdvController {
         
        
         
-        List<RendezVous> listRdv = rdvConsumer.recherche(date, idMedecin, idVille, idSpecialite);
+        List<RendezVous> listRdv = rdvConsumer.recherche(date, patient.getId(),idMedecin, idVille, idSpecialite);
         model.addAttribute("listRdv", listRdv);
 
         return "search";

@@ -63,17 +63,20 @@
     <tr>
       <th>Date</th>
       <th>Heure</th>
-      <th>Compte rendu</th>
+      <th>Nom Medecin</th>
+      <th>Compte Rendu</th>
     </tr>
   </thead>
   <tbody>
     <tr th:each="rdv : ${listRdv}">
       <td th:text="${rdv.dateRdv}"></td>
       <td th:text="${rdv.heure}"></td>
+      <td th:text="${rdv.medecin.nom}"></td>
       <td th:text="${rdv.compteRenduRdv}"></td>
     </tr>
   </tbody>
 </table>
+	<p><a th:href="@{/home}"><button>Retour</button></a></p>
 
 </body>
 </html>

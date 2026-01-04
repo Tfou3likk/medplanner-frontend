@@ -29,6 +29,10 @@ public class RdvPatientController {
 	
 			Patient patient = (Patient) session.getAttribute("patient");
 			
+			if(patient == null) {
+				return"redirect:/login";
+			}
+			
 			List<RendezVous> listRdv = rdv.listerRdvPatient(patient.getId()); 
 			
 			

@@ -38,9 +38,10 @@ public class RendezVousConsumer {
 		.body(new ParameterizedTypeReference<List<RendezVous>>() {});
 	}
 	
-	public List<RendezVous> recherche(LocalDate date, Integer idMedecin, Integer idVille, Integer idSpecialite){
+	public List<RendezVous> recherche(LocalDate date, Integer idPatient, Integer idMedecin, Integer idVille, Integer idSpecialite){
 		
 		return restClient.get().uri(uriTotal -> uriTotal.path("/api/rdv/search")
+				.queryParam("idPatient", idPatient)
 				.queryParam("date", date)
 				.queryParamIfPresent("idMedecin", Optional.ofNullable(idMedecin))
 				.queryParamIfPresent("idVille", java.util.Optional.ofNullable(idVille))

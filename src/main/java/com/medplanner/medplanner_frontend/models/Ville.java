@@ -4,20 +4,29 @@ public class Ville {
 	
 	private Integer id;
 	
-	private String libelle;
+	private String nomVille;
 
 	public Ville() {
 		super();
 	}
 	
 	
-
-	public Ville(Integer id, String libelle) {
+	public Ville(Integer id, String nomVille) {
 		super();
 		this.id = id;
-		this.libelle = libelle;
+		this.nomVille = nomVille;
 	}
 
+	
+
+	public String getNomVille() {
+		return nomVille;
+	}
+
+
+	public void setNomVille(String nomVille) {
+		this.nomVille = nomVille;
+	}
 
 
 	public Integer getId() {
@@ -28,13 +37,13 @@ public class Ville {
 		this.id = id;
 	}
 
-	public String getLibelle() {
-		return libelle;
-	}
 
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
-	}
+
+
+
+
+	
+
 	
 	
 
